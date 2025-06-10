@@ -1,0 +1,22 @@
+﻿@page "/"
+
+<PageTitle>Landing Page</PageTitle>
+
+<div class="landing-container">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Welcome to Our Platform</h1>
+            <p class="hero-subtitle">A modern solution for all your needs</p>
+            <div class="cta-buttons">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="auth/register">Get Started</MudButton>
+                <MudButton Variant="Variant.Outlined" Color="Color.Primary" Href="auth/login" Class="ml-2">Sign In</MudButton>
+            </div>
+        </div>
+    </section>
+
+    <footer class="landing-footer">
+        <div class="container">
+            <p>&copy; @DateTime.Now.Year Your Company. All rights reserved.</p>
+        </div>
+    </footer>
+</div>

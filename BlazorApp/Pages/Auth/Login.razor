@@ -1,0 +1,96 @@
+﻿@page "/auth/login"
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Login</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex justify-center mt-6">
+    <MudCard Elevation="25" Class="pa-4" Style="width: 500px;">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h5" Class="mb-4">Login</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudForm @ref="_form" @bind-IsValid="@_success">
+                <MudTextField T="string" Label="Email" @bind-Value="_email" Required="true"
+                              RequiredError="Email is required"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidateEmail))" />
+                <MudTextField T="string" Label="Password" @bind-Value="_password"
+                              Required="true" RequiredError="Password is required"
+                              InputType="InputType.Password" />
+
+                @if (!string.IsNullOrEmpty(_errorMessage))
+                {
+                    <MudAlert Severity="Severity.Error" Class="mt-3">@_errorMessage</MudAlert>
+                }
+            </MudForm>
+        </MudCardContent>
+        <MudCardActions Class="d-flex justify-space-between">
+            <MudLink Href="/auth/register">Don't have an account? Register</MudLink>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true"
+                       OnClick="LoginAsync" Disabled="@(!_success || _processing)">
+                @if (_processing)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Processing</MudText>
+                }
+                else
+                {
+                    <MudText>Login</MudText>
+                }
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudContainer>
+
+@code {
+    private MudForm _form = null!;
+    private string _email = string.Empty;
+    private string _password = string.Empty;
+    private bool _success;
+    private bool _processing;
+    private string _errorMessage = string.Empty;
+
+    [Parameter]
+    [SupplyParameterFromQuery(Name = "returnUrl")]
+    public string? ReturnUrl { get; set; }
+
+    private IEnumerable<string> ValidateEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            yield return "Email is required";
+        else if (!email.Contains('@') || !email.Contains('.'))
+            yield return "Please enter a valid email address";
+    }
+
+    private async Task LoginAsync()
+    {
+        _processing = true;
+        _errorMessage = string.Empty;
+
+        try
+        {
+            var user = await AuthService.LoginAsync(_email, _password);
+
+            if (user != null)
+            {
+                var returnUrl = string.IsNullOrEmpty(ReturnUrl) ? "home" : ReturnUrl;
+                NavigationManager.NavigateTo(returnUrl);
+            }
+            else
+            {
+                _errorMessage = "Invalid email or password";
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"An error occurred: {ex.Message}";
+        }
+        finally
+        {
+            _processing = false;
+        }
+    }
+}

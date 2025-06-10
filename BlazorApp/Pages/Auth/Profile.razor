@@ -1,0 +1,44 @@
+﻿@page "/profile"
+@attribute [Authorize]
+@inject AuthService AuthService
+
+<PageTitle>Profile</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
+    <MudText Typo="Typo.h3" GutterBottom="true">Profile</MudText>
+
+    @if (_user != null)
+    {
+        <MudCard Elevation="3" Class="mt-4">
+            <MudCardHeader>
+                <CardHeaderAvatar>
+                    <MudAvatar Color="Color.Primary">@_user.Name[0].ToString().ToUpper()</MudAvatar>
+                </CardHeaderAvatar>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">@_user.Name</MudText>
+                    <MudText Typo="Typo.body2">@_user.Email</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudForm>
+                    <MudTextField T="string" Label="Name" Value="@_user.Name" ReadOnly="true" Variant="Variant.Outlined" Class="mt-3" />
+                    <MudTextField T="string" Label="Email" Value="@_user.Email" ReadOnly="true" Variant="Variant.Outlined" Class="mt-3" />
+                </MudForm>
+            </MudCardContent>
+        </MudCard>
+    }
+    else
+    {
+        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
+    }
+</MudContainer>
+
+@code {
+    private AuthService.UserDto? _user;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _user = await AuthService.GetCurrentUserAsync();
+    }
+
+}

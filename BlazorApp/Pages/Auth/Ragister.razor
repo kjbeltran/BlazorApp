@@ -1,0 +1,114 @@
+﻿@page "/auth/register"
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle>Register</PageTitle>
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="d-flex justify-center mt-6">
+    <MudCard Elevation="25" Class="pa-4" Style="width: 500px;">
+        <MudCardHeader>
+            <CardHeaderContent>
+                <MudText Typo="Typo.h5" Class="mb-4">Register</MudText>
+            </CardHeaderContent>
+        </MudCardHeader>
+        <MudCardContent>
+            <MudForm @ref="_form" @bind-IsValid="@_success">
+                <MudTextField T="string" Label="Name" @bind-Value="_name" Required="true"
+                              RequiredError="Name is required" />
+                <MudTextField T="string" Label="Email" @bind-Value="_email" Required="true"
+                              RequiredError="Email is required"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidateEmail))" />
+                <MudTextField T="string" Label="Password" @bind-Value="_password"
+                              Required="true" RequiredError="Password is required"
+                              InputType="InputType.Password"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidatePassword))" />
+                <MudTextField T="string" Label="Confirm Password" @bind-Value="_confirmPassword"
+                              Required="true" RequiredError="Confirm Password is required"
+                              InputType="InputType.Password"
+                              Validation="@(new Func<string, IEnumerable<string>>(ValidateConfirmPassword))" />
+
+                @if (!string.IsNullOrEmpty(_errorMessage))
+                {
+                    <MudAlert Severity="Severity.Error" Class="mt-3">@_errorMessage</MudAlert>
+                }
+            </MudForm>
+        </MudCardContent>
+        <MudCardActions Class="d-flex justify-space-between">
+            <MudLink Href="/auth/login">Already have an account? Login</MudLink>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true"
+                       OnClick="RegisterAsync" Disabled="@(!_success || _processing)">
+                @if (_processing)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true" />
+                    <MudText Class="ms-2">Processing</MudText>
+                }
+                else
+                {
+                    <MudText>Register</MudText>
+                }
+            </MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudContainer>
+
+@code {
+    private MudForm _form = null!;
+    private string _name = string.Empty;
+    private string _email = string.Empty;
+    private string _password = string.Empty;
+    private string _confirmPassword = string.Empty;
+    private bool _success;
+    private bool _processing;
+    private string _errorMessage = string.Empty;
+
+    private IEnumerable<string> ValidateEmail(string email)
+    {
+        if (string.IsNullOrWhiteSpace(email))
+            yield return "Email is required";
+        else if (!email.Contains('@') || !email.Contains('.'))
+            yield return "Please enter a valid email address";
+    }
+
+    private IEnumerable<string> ValidatePassword(string password)
+    {
+        if (string.IsNullOrWhiteSpace(password))
+            yield return "Password is required";
+        else if (password.Length < 6)
+            yield return "Password must be at least 6 characters";
+    }
+
+    private IEnumerable<string> ValidateConfirmPassword(string confirmPassword)
+    {
+        if (confirmPassword != _password)
+            yield return "Passwords do not match";
+    }
+
+    private async Task RegisterAsync()
+    {
+        _processing = true;
+        _errorMessage = string.Empty;
+
+        try
+        {
+            var user = await AuthService.RegisterAsync(_name, _email, _password);
+
+            if (user != null)
+            {
+                NavigationManager.NavigateTo("/home");
+            }
+            else
+            {
+                _errorMessage = "User with this email already exists";
+            }
+        }
+        catch (Exception ex)
+        {
+            _errorMessage = $"An error occurred: {ex.Message}";
+        }
+        finally
+        {
+            _processing = false;
+        }
+    }
+}
