@@ -1,0 +1,150 @@
+@inherits LayoutComponentBase
+@inject IJSRuntime JSRuntime
+
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <!-- Header navbar starts -->
+        <nav class="navbar header-navbar pcoded-header" header-theme="theme1">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu waves-effect waves-light" id="mobile-collapse" href="javascript:void(0)" @onclick="ToggleSidebar">
+                        <i class="ti-menu"></i>
+                    </a>
+                    <a href="home">
+                        <img class="img-fluid" src="images/smart-accounting-logo.png" alt="Smart Accounting" style="height: 110px; margin-left: 25px;" />
+                    </a>
+                    <a class="mobile-options waves-effect waves-light" @onclick="ToggleMobileMenu">
+                        <i class="ti-more"></i>
+                    </a>
+                </div>
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li>
+                            <div class="sidebar_toggle"><a href="javascript:void(0)" @onclick="ToggleSidebar"><i class="ti-menu"></i></a></div>
+                        </li>
+                    </ul>
+                    <ul class="nav-right">
+                        <li class="user-profile header-notification">
+                            <a href="javascript:void(0)" class="waves-effect waves-light">
+                                <img src="images/smart-accounting-logo.png" class="img-radius" alt="User-Profile-Image" style="background-color: #fff; padding: 2px;">
+                                <span style="color: #d4af37;">Smart Accounting</span>
+                                <i class="ti-angle-down"></i>
+                            </a>
+                            <ul class="show-notification profile-notification">
+                                <li class="waves-effect waves-light">
+                                    <a href="profile">
+                                        <i class="ti-user"></i> Profile
+                                    </a>
+                                </li>
+                                <li class="waves-effect waves-light">
+                                    <a href="javascript:void(0)" @onclick="Logout">
+                                        <i class="ti-layout-sidebar-left"></i> Logout
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header navbar ends -->
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+                <!-- Sidebar starts -->
+                <nav class="pcoded-navbar" navbar-theme="theme1" active-item-theme="theme1" id="sidebar">
+                    <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="icon-close icons"></i></a></div>
+                    <div class="pcoded-inner-navbar main-menu">
+                        <div class="">
+                            <div class="main-menu-header" style="background-color: #000;">
+                                <img class="img-80 img-radius" src="images/smart-accounting-logo.png" alt="Smart Accounting" style="background-color: #fff; padding: 5px;">
+                                <div class="user-details">
+                                    <span style="color: #d4af37;">Smart Accounting</span>
+                                    <div style="color: #888888; font-size: 12px;">Professional Solutions</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pcoded-navigation-label" style="color: #000000;">Smart Accounting</div>
+                        <ul class="pcoded-item pcoded-left-item">
+                            <li class="@GetActiveClass("home")">
+                                <NavLink href="home" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-home"></i></span>
+                                    <span class="pcoded-mtext">Dashboard</span>
+                                </NavLink>
+                            </li>
+                            <li class="@GetActiveClass("profile")">
+                                <NavLink href="profile" class="waves-effect waves-dark">
+                                    <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                    <span class="pcoded-mtext">Profile</span>
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+                <!-- Sidebar ends -->
+
+                <!-- Main content starts -->
+                <div class="pcoded-content">
+                    <div class="pcoded-inner-content">
+                        <div class="main-body">
+                            <div class="page-wrapper">
+                                <div class="page-body">
+                                    @Body
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main content ends -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private bool _sidebarOpen = true;
+    private bool _mobileMenuOpen = false;
+
+    [Inject]
+    private NavigationManager NavigationManager { get; set; }
+
+    [Inject]
+    private AuthService AuthService { get; set; }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("initTheme");
+        }
+    }
+
+    private async Task ToggleSidebar()
+    {
+        _sidebarOpen = !_sidebarOpen;
+        await JSRuntime.InvokeVoidAsync("toggleSidebar");
+    }
+
+    private async Task ToggleMobileMenu()
+    {
+        _mobileMenuOpen = !_mobileMenuOpen;
+        await JSRuntime.InvokeVoidAsync("toggleMobileMenu");
+    }
+
+    private string GetActiveClass(string href)
+    {
+        var currentUri = NavigationManager.Uri;
+        if (currentUri.Contains(href))
+        {
+            return "active";
+        }
+        return string.Empty;
+    }
+
+    private async Task Logout()
+    {
+        await AuthService.LogoutAsync();
+        NavigationManager.NavigateTo("/");
+    }
+}

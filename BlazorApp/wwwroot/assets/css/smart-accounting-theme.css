@@ -1,0 +1,384 @@
+/* Smart Accounting Theme Colors */
+:root {
+    --primary-color: #d4af37;
+    --secondary-color: #888888;
+    --dark-color: #000000;
+    --light-color: #ffffff;
+}
+
+/* Bootstrap Theme Color Overrides */
+.btn-primary, 
+.btn-primary:hover, 
+.btn-primary:focus {
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    color: var(--dark-color) !important;
+    font-weight: 500;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 2px 5px rgba(212, 175, 55, 0.5);
+}
+
+.btn-outline-primary {
+    border-color: var(--primary-color) !important;
+    color: var(--primary-color) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-color) !important;
+    color: var(--dark-color) !important;
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary, .badge-primary {
+    background-color: var(--primary-color) !important;
+    color: var(--dark-color) !important;
+}
+
+/* Navbar and Sidebar Styling */
+.header-navbar.navbar-theme-primary {
+    background: var(--dark-color);
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"] {
+    background: var(--dark-color);
+}
+
+.pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item li.active > a {
+    color: var(--dark-color) !important;
+    background: var(--primary-color) !important;
+    border-left-color: var(--primary-color) !important;
+}
+
+.pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item li.active > a:hover {
+    color: var(--dark-color) !important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item > li > a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Form Controls */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.25);
+}
+
+/* Form Material Styling for Login and Register Pages */
+.form-material .form-control:focus ~ .float-label {
+    color: var(--primary-color) !important;
+}
+
+.form-material .form-control:focus ~ .form-bar:after,
+.form-material .form-control:focus ~ .form-bar:before {
+    background: var(--primary-color) !important;
+}
+
+/* Override form-primary class */
+.form-material .form-primary .form-control:focus ~ label {
+    color: var(--primary-color) !important;
+}
+
+.form-material .form-primary .form-control:focus ~ .form-bar:after,
+.form-material .form-primary .form-control:focus ~ .form-bar:before {
+    background: var(--primary-color) !important;
+}
+
+.form-material .form-primary.form-static-label .float-label {
+    color: var(--primary-color) !important;
+}
+
+.form-material .form-primary.form-static-label .form-control {
+    border-bottom-color: var(--primary-color) !important;
+}
+
+.form-material .material-group-primary .material-addone i,
+.form-material .material-group-primary .material-addone span {
+    color: var(--primary-color) !important;
+}
+
+/* Override form-inverse class */
+.form-material .form-inverse .form-control:focus ~ label {
+    color: var(--dark-color) !important;
+}
+
+.form-material .form-inverse .form-control:focus ~ .form-bar:after,
+.form-material .form-inverse .form-control:focus ~ .form-bar:before {
+    background: var(--dark-color) !important;
+}
+
+.form-material .form-inverse.form-static-label .float-label {
+    color: var(--dark-color) !important;
+}
+
+.form-material .form-inverse.form-static-label .form-control {
+    border-bottom-color: var(--dark-color) !important;
+}
+
+.form-material .material-group-inverse .material-addone i,
+.form-material .material-group-inverse .material-addone span {
+    color: var(--dark-color) !important;
+}
+
+/* Card Styling */
+.card .card-header {
+    border-bottom-color: var(--primary-color);
+}
+
+.card-header-primary {
+    background: linear-gradient(to right, var(--dark-color), #333);
+    border-bottom: 3px solid var(--primary-color);
+    color: var(--light-color);
+}
+
+/* Progress Bars */
+.progress-bar-primary {
+    background-color: var(--primary-color);
+}
+
+/* Tables */
+.table .thead-primary th {
+    background-color: var(--dark-color);
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* Pagination */
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+}
+
+.page-link {
+    color: var(--primary-color);
+}
+
+/* Alerts */
+.alert-primary {
+    background-color: rgba(212, 175, 55, 0.2);
+    border-color: var(--primary-color);
+    color: var(--dark-color);
+}
+
+/* Custom Styling for Mega Able Components */
+.header-navbar .navbar-wrapper .navbar-logo {
+    background: var(--dark-color);
+    border-bottom: 3px solid var(--primary-color);
+}
+
+.pcoded .pcoded-header[header-theme="theme1"] {
+    background: var(--dark-color);
+}
+
+.pcoded .pcoded-navbar[active-item-theme="theme1"] .pcoded-item li:hover > a {
+    color: var(--primary-color) !important;
+}
+
+/* Footer Styling */
+.footer-copyright {
+    background: var(--dark-color);
+    border-top: 3px solid var(--primary-color);
+    color: var(--light-color);
+}
+
+/* Custom Card Styling */
+.card.bg-c-yellow {
+    background: linear-gradient(to right, var(--primary-color), #f5e08c) !important;
+}
+
+.card.bg-c-green {
+    background: linear-gradient(to right, #2ed8b6, #59e0c5) !important;
+}
+
+.card.bg-c-pink {
+    background: linear-gradient(to right, #888888, #aaaaaa) !important;
+}
+
+/* Mega Able Theme Specific Overrides */
+.header-navbar {
+    background-color: var(--dark-color) !important;
+    border-bottom: 3px solid var(--primary-color);
+}
+
+/* Override header-theme="theme1" */
+.pcoded .pcoded-header[header-theme="theme1"] {
+    background-color: var(--dark-color) !important;
+}
+
+.pcoded .pcoded-header[header-theme="theme1"] .navbar-wrapper {
+    background-color: var(--dark-color) !important;
+}
+
+.pcoded .pcoded-header[header-theme="theme1"] .navbar-logo {
+    background-color: var(--secondary-color) !important;
+}
+
+.pcoded .pcoded-navbar {
+    background-color: var(--dark-color) !important;
+}
+
+/* Override navbar-theme="theme1" */
+.pcoded .pcoded-navbar[navbar-theme="theme1"] {
+    background-color: var(--dark-color) !important;
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item > li > a {
+    border-bottom-color: var(--dark-color) !important;
+}
+
+.pcoded .pcoded-navbar[navbar-theme="theme1"] .pcoded-item li.pcoded-hasmenu .pcoded-submenu {
+    background-color: var(--dark-color) !important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item > li.active > a {
+    color: var(--primary-color) !important;
+    border-left-color: var(--primary-color) !important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu.active:after {
+    color: var(--primary-color) !important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu.pcoded-trigger > a {
+    background-color: rgba(212, 175, 55, 0.1) !important;
+}
+
+/* Loader Animation Colors */
+.spinner-layer.spinner-blue { border-color: var(--primary-color) !important; }
+.spinner-layer.spinner-red { border-color: var(--secondary-color) !important; }
+.spinner-layer.spinner-yellow { border-color: var(--primary-color) !important; }
+.spinner-layer.spinner-green { border-color: var(--light-color) !important; }
+
+/* Notification Badge */
+.badge-light-primary {
+    background-color: rgba(212, 175, 55, 0.2);
+    color: var(--primary-color);
+}
+
+/* Dropdown Menus */
+.dropdown-item.active, .dropdown-item:active {
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+}
+
+/* Tabs */
+.nav-tabs .nav-link.active {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.tab-content {
+    border-top: 1px solid var(--primary-color);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+}
+
+/* Typography Enhancements */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--dark-color);
+}
+
+h1 span, h2 span, h3 span, h4 span, h5 span, h6 span {
+    color: var(--primary-color);
+}
+
+/* Secondary Button Styling */
+.btn-secondary {
+    background-color: var(--secondary-color) !important;
+    border-color: var(--secondary-color) !important;
+}
+
+/* Navbar Styling */
+.header-navbar {
+    background-color: var(--dark-color) !important;
+}
+
+.header-navbar .navbar-wrapper .navbar-logo {
+    background-color: var(--secondary-color) !important;
+}
+
+/* Sidebar Styling */
+.pcoded .pcoded-navbar {
+    background: var(--dark-color) !important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item > li > a {
+    color: var(--light-color) !important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item > li.active > a {
+    color: var(--light-color) !important;
+    background: var(--primary-color) !important;
+    border-left-color: var(--primary-color) !important;
+}
+
+.pcoded .pcoded-navbar .pcoded-item > li > a:hover {
+    color: var(--primary-color) !important;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    color: var(--dark-color);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+}
+
+a:hover, a:focus {
+    color: #c09c30;
+}
+
+/* Card Headers */
+.card .card-header {
+    border-bottom-color: var(--primary-color);
+}
+
+/* Active Navigation */
+.pcoded .pcoded-navbar .pcoded-item .pcoded-hasmenu.active > a {
+    background-color: rgba(212, 175, 55, 0.1) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Typography */
+body {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+/* Login/Registration Form */
+.auth-box {
+    border-top: 4px solid var(--primary-color);
+}
+
+/* Loader Colors */
+.theme-loader .spinner-layer.spinner-blue {
+    border-color: var(--primary-color);
+}
+.theme-loader .spinner-layer.spinner-red {
+    border-color: var(--secondary-color);
+}
+.theme-loader .spinner-layer.spinner-yellow {
+    border-color: var(--primary-color);
+}
+.theme-loader .spinner-layer.spinner-green {
+    border-color: var(--dark-color);
+}
+
+/* Footer */
+.landing-footer {
+    background-color: var(--dark-color) !important;
+}
+
+/* Theme Background */
+.theme-bg {
+    background: linear-gradient(to right, var(--dark-color), #333333) !important;
+}

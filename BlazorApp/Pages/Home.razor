@@ -1,6 +1,59 @@
-﻿@page "/Home"
+@page "/Home"
 @attribute [Authorize]
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Smart Accounting - Dashboard</PageTitle>
 
-<h1>Welcome!</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Welcome to Smart Accounting Dashboard</h5>
+                <div class="card-header-right">
+                    <ul class="list-unstyled card-option">
+                        <li><i class="fa fa-chevron-left"></i></li>
+                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                        <li><i class="fa fa-minus minimize-card"></i></li>
+                        <li><i class="fa fa-refresh reload-card"></i></li>
+                        <li><i class="fa fa-times close-card"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-block">
+                <p>Welcome to your Smart Accounting dashboard! This is where you can manage all your financial activities and monitor your business performance.</p>
+                <div class="alert alert-success">
+                    <strong>Welcome!</strong> You've successfully logged into the Smart Accounting platform. Use the sidebar menu to navigate to different accounting features.
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <div class="card bg-c-yellow text-white">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Financial Reports</h6>
+                                <h2 class="text-right"><i class="ti-agenda f-left"></i><span>12</span></h2>
+                                <p class="m-b-0">Monthly Reports<span class="f-right">4 New</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-c-green text-white">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Tax Documents</h6>
+                                <h2 class="text-right"><i class="ti-files f-left"></i><span>8</span></h2>
+                                <p class="m-b-0">Quarterly Filings<span class="f-right">2 Pending</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-c-pink text-white">
+                            <div class="card-block">
+                                <h6 class="m-b-20">Client Accounts</h6>
+                                <h2 class="text-right"><i class="ti-user f-left"></i><span>25</span></h2>
+                                <p class="m-b-0">Active Clients<span class="f-right">3 New</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

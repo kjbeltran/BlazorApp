@@ -1,0 +1,13 @@
+@inherits LayoutComponentBase
+
+<div class="public-layout">
+    <main>
+        @Body
+    </main>
+</div>
+
+@code {
+    // Public layout for unauthenticated users
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+}

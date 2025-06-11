@@ -3,17 +3,220 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BlazorApp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Smart Accounting - Professional Accounting Solutions" />
+    <title>Smart Accounting</title>
     <base href="/" />
-    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/app.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" href="images/smart-accounting-logo.png" />
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- waves.css -->
+    <link rel="stylesheet" href="assets/pages/waves/css/waves.min.css" type="text/css" media="all">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap/css/bootstrap.min.css">
+    <!-- themify icon -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/themify-icons/themify-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" type="text/css" href="assets/icon/font-awesome/css/font-awesome.min.css">
+    <!-- scrollbar.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.mCustomScrollbar.css">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/smart-accounting-theme.css">
     <link href="BlazorApp.styles.css" rel="stylesheet" />
-    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    
+    <!-- Theme Loader CSS -->
+    <style>
+        .theme-loader {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 999999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .theme-loader .loader-track {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .preloader-wrapper {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .spinner-layer {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            border-color: #d4af37;
+            animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        }
+        
+        .spinner-blue { border-color: #d4af37; }
+        .spinner-red { border-color: #888888; animation-delay: -1333ms; }
+        .spinner-yellow { border-color: #d4af37; animation-delay: -2666ms; }
+        .spinner-green { border-color: #ffffff; animation-delay: -4000ms; }
+        
+        .gap-patch {
+            position: absolute;
+            top: 0;
+            left: 45%;
+            width: 10%;
+            height: 100%;
+            overflow: hidden;
+            border-color: inherit;
+        }
+        
+        .gap-patch .circle {
+            width: 1000%;
+            left: -450%;
+        }
+        
+        .circle-clipper {
+            display: inline-block;
+            position: relative;
+            width: 50%;
+            height: 100%;
+            overflow: hidden;
+            border-color: inherit;
+        }
+        
+        .circle-clipper .circle {
+            width: 200%;
+            height: 100%;
+            border-width: 3px;
+            border-style: solid;
+            border-color: inherit;
+            border-bottom-color: transparent !important;
+            border-radius: 50%;
+            animation: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+        
+        .circle-clipper.left .circle {
+            left: 0;
+            border-right-color: transparent !important;
+            transform: rotate(129deg);
+            animation: left-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        }
+        
+        .circle-clipper.right .circle {
+            left: -100%;
+            border-left-color: transparent !important;
+            transform: rotate(-129deg);
+            animation: right-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+        }
+        
+        @keyframes fill-unfill-rotate {
+            12.5% { transform: rotate(135deg); }
+            25% { transform: rotate(270deg); }
+            37.5% { transform: rotate(405deg); }
+            50% { transform: rotate(540deg); }
+            62.5% { transform: rotate(675deg); }
+            75% { transform: rotate(810deg); }
+            87.5% { transform: rotate(945deg); }
+            to { transform: rotate(1080deg); }
+        }
+        
+        @keyframes left-spin {
+            from { transform: rotate(130deg); }
+            50% { transform: rotate(-5deg); }
+            to { transform: rotate(130deg); }
+        }
+        
+        @keyframes right-spin {
+            from { transform: rotate(-130deg); }
+            50% { transform: rotate(5deg); }
+            to { transform: rotate(-130deg); }
+        }
+        
+        .theme-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-out;
+        }
+    </style>
 </head>
 
 <body>
+    <!-- Smart Accounting Branded Loader -->
+    <div class="theme-loader">
+        <div class="loader-track">
+            <div class="logo-container">
+                <img src="images/smart-accounting-logo.png" alt="Smart Accounting" style="height: 60px; margin-bottom: 20px;">
+            </div>
+            <div class="preloader-wrapper">
+                <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-red">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-yellow">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+                <div class="spinner-layer spinner-green">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 15px; color: #d4af37; font-weight: 500;">Loading Smart Accounting...</div>
+        </div>
+    </div>
+    
     <div id="app">
         <svg class="loading-progress">
             <circle r="40%" cx="50%" cy="50%" />
@@ -27,8 +230,70 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
-    <script src="_framework/blazor.webassembly.js"></script>
-    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <!-- Custom error handling is used instead of default Blazor error UI -->
+    <!-- Theme Loader Script - Hide loader when Blazor is ready -->
+    <script>
+        // Store the original Blazor start function
+        window.blazorStarted = false;
+        
+        // Function to hide the loader
+        function hideLoader() {
+            if (window.blazorStarted) {
+                // Add the 'loaded' class to fade out the loader
+                const loader = document.querySelector('.theme-loader');
+                if (loader) {
+                    loader.classList.add('loaded');
+                    
+                    // Remove the loader from DOM after transition completes
+                    setTimeout(() => {
+                        if (loader && loader.parentNode) {
+                            loader.parentNode.removeChild(loader);
+                        }
+                    }, 300); // Match this with the CSS transition duration
+                }
+            }
+        }
+        
+        // Check if Blazor is already loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.Blazor) {
+                window.blazorStarted = true;
+                hideLoader();
+            }
+        });
+    </script>
+    
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    
+    <script>
+        // Start Blazor and hide loader when ready
+        Blazor.start().then(() => {
+            window.blazorStarted = true;
+            hideLoader();
+        });
+    </script>
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="assets/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/js/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="assets/js/popper.js/popper.min.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap/js/bootstrap.min.js"></script>
+    <!-- waves js -->
+    <script src="assets/pages/waves/js/waves.min.js"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript" src="assets/js/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="assets/js/modernizr/modernizr.js"></script>
+    <!-- slimscroll js -->
+    <!-- Disabled SmoothScroll.js to fix passive event listener warnings -->
+    <!-- <script type="text/javascript" src="assets/js/SmoothScroll.js"></script> -->
+    <script src="assets/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <!-- menu js -->
+    <script src="assets/js/pcoded.min.js"></script>
+    <script src="assets/js/vertical-layout.min.js"></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="assets/js/script.js"></script>
+    <!-- Blazor interop js -->
+    <script type="text/javascript" src="assets/js/blazor-interop.js"></script>
 </body>
 
 </html>

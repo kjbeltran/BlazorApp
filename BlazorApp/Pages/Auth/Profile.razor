@@ -1,37 +1,80 @@
-﻿@page "/profile"
+@page "/profile"
 @attribute [Authorize]
 @inject AuthService AuthService
 
 <PageTitle>Profile</PageTitle>
 
-<MudContainer MaxWidth="MaxWidth.Medium" Class="mt-4">
-    <MudText Typo="Typo.h3" GutterBottom="true">Profile</MudText>
-
-    @if (_user != null)
-    {
-        <MudCard Elevation="3" Class="mt-4">
-            <MudCardHeader>
-                <CardHeaderAvatar>
-                    <MudAvatar Color="Color.Primary">@_user.Name[0].ToString().ToUpper()</MudAvatar>
-                </CardHeaderAvatar>
-                <CardHeaderContent>
-                    <MudText Typo="Typo.h6">@_user.Name</MudText>
-                    <MudText Typo="Typo.body2">@_user.Email</MudText>
-                </CardHeaderContent>
-            </MudCardHeader>
-            <MudCardContent>
-                <MudForm>
-                    <MudTextField T="string" Label="Name" Value="@_user.Name" ReadOnly="true" Variant="Variant.Outlined" Class="mt-3" />
-                    <MudTextField T="string" Label="Email" Value="@_user.Email" ReadOnly="true" Variant="Variant.Outlined" Class="mt-3" />
-                </MudForm>
-            </MudCardContent>
-        </MudCard>
-    }
-    else
-    {
-        <MudProgressCircular Color="Color.Primary" Indeterminate="true" />
-    }
-</MudContainer>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>User Profile</h5>
+                <div class="card-header-right">
+                    <ul class="list-unstyled card-option">
+                        <li><i class="fa fa-chevron-left"></i></li>
+                        <li><i class="fa fa-window-maximize full-card"></i></li>
+                        <li><i class="fa fa-minus minimize-card"></i></li>
+                        <li><i class="fa fa-refresh reload-card"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card-block">
+                @if (_user != null)
+                {
+                    <div class="row">
+                        <div class="col-md-4 col-lg-3">
+                            <div class="user-profile-box text-center">
+                                <div class="user-profile-img">
+                                    <div class="avatar bg-primary" style="width: 100px; height: 100px; font-size: 40px; line-height: 100px; margin: 0 auto; border-radius: 50%; color: white;">
+                                        @_user.Name[0].ToString().ToUpper()
+                                    </div>
+                                </div>
+                                <div class="user-profile-details mt-3">
+                                    <h4>@_user.Name</h4>
+                                    <p class="text-muted">@_user.Email</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 col-lg-9">
+                            <div class="user-profile-data">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Full Name</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="@_user.Name" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <input type="email" class="form-control" value="@_user.Email" readonly>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-3 col-form-label">Member Since</label>
+                                            <div class="col-sm-9">
+                                                <input type="text" class="form-control" value="@DateTime.Now.AddMonths(-3).ToString("MMMM dd, yyyy")" readonly>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center p-5">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
 @code {
     private AuthService.UserDto? _user;
